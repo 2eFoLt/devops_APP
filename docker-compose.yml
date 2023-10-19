@@ -11,12 +11,14 @@ services:
       - ./webapp:/webapp
     ports:
       - "5000:5000"
+    depends_on:
+      - db
     command: app.py
 
   db:
     image: mysql:5.7
     ports:
-      - "32000:3306"
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
     volumes:
