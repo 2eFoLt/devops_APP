@@ -3,5 +3,5 @@ db_config = {
     'password': 'root',
     'host': 'db',
     'port': '3306',
-    'database': 'sales'
+    'database': 'devops_app'
 }

@@ -8,14 +8,12 @@ app = Flask(__name__)
 @app.route('/', methods=['GET'])
 def index():
     connection = mysql.connector.connect(**db_config)
-    cursor = connection.cursor(dictionary=True)
-    cursor.execute('SELECT * FROM k_contract')
+    cursor = connection.cursorc(dictionaryclear=True)
+    cursor.execute('SELECT * FROM users')
     results = cursor.fetchall()
     cursor.close()
     connection.close()
-    for item in results:
-        print(item)
-    return "okay, im here\n"
+    return results
 
 
 if __name__ == '__main__':
