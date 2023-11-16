@@ -19,7 +19,7 @@ def cursor_wrapper(func):
         print('Cursor executed')
         cursor.close()
         print('Cursor closed')
-        if 'INSERT' in query:
+        if 'INSERT' in query or 'UPDATE' in query:
             connection.commit()
             print('Changes commited')
         connection.close()
@@ -31,6 +31,17 @@ def cursor_wrapper(func):
 
 def wrap_in_quotes(iterable):
     return [f"'{i}'" for i in iterable]
+
+
+def iterable1_1(it1, it2):
+    res = []
+    for i in range(len(it1)):
+        if not it2[i].isnumeric():
+            temp = "'" + it2[i] + "'"
+        else:
+            temp = int(it2[i])
+        res.append(f"{it1[i]} = {temp}")
+    return ','.join(res)
 
 
 class ConnectorDB:
@@ -47,4 +58,9 @@ class ConnectorDB:
     @cursor_wrapper
     def insert(self, target_table, it_columns, it_values):
         query = f"INSERT INTO {target_table} ({','.join(it_columns)}) VALUES({','.join(wrap_in_quotes(it_values))})"
+        return query
+
+    @cursor_wrapper
+    def update(self, target_table, it_columns, it_values, where=None):
+        query = f"UPDATE {target_table} SET {iterable1_1(it_columns, it_values)} WHERE {where}"
         return query

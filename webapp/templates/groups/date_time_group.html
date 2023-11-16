@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/groups">Back to index</a>
+<form method="POST" action="/date_time_group">
+    <div class="mb-3">
+        <label>Start date:</label>
+        <input type="date" name="date_start" value="2018-07-22"/>
+    </div>
+    <div class="mb-3">
+        <label>Choose a time for your meeting:</label>
+        <input type="time" name="time_start" required/>
+    </div>
+    <div class="mb-3">
+        <label>Start date:</label>
+        <input type="date" name="date_end" value="2018-07-22"/>
+    </div>
+    <div class="mb-3">
+        <label>Choose a time for your meeting:</label>
+        <input type="time" name="time_end" required/>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{{task7}}
+
+</body>
+</html>
