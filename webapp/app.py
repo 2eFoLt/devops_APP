@@ -35,6 +35,19 @@ def create_height():
     return render_template('create_height.html', task2=task2)
 
 
+@app.route('/edit_height/<int:height_id>', methods=['GET', 'POST'])
+def edit_height(height_id):
+    task3 = connector_object.select(['*'], 'heights')
+    if request.method == 'POST':
+        print(connector_object.update('heights', ['name', 'height', 'country'], list(request.form.values()),
+                                      where=f'id={height_id}'))
+        return redirect(url_for('index'))
+    else:
+        heights = connector_object.select(['*'], 'heights')
+        print(heights)
+        return render_template('edit_height.html', task3=task3, id=height_id)
+
+
 @app.route('/date_time', methods=['GET', 'POST'])
 def date_time():
     if request.method == 'POST':
@@ -50,8 +63,31 @@ def date_time():
                                          where='ascend_groups.ascend_start_time',
                                          between=(f"'{date_start} {time_start}'", f"'{date_end} {time_end}'"))
         print(result)
-        return render_template('index.html', task4=result)
-    return render_template('index.html')
+        return render_template('groups/date_time.html', task4=result)
+    return render_template('groups/date_time.html')
+
+
+@app.route('/groups', methods=['GET', 'POST'])
+def groups():
+    return render_template('groups/index.html')
+
+
+@app.route('/date_time_group', methods=['GET', 'POST'])
+def date_time_group():
+    if request.method == 'POST':
+        date_start, time_start = request.form.get('date_start'), request.form.get('time_start')
+        date_end, time_end = request.form.get('date_end'), request.form.get('time_end')
+        time_start += ':00'
+        time_end += ':00'
+        print(date_start, time_start)
+        print(date_end, time_end)
+        result = connector_object.select(['ascend_groups.group_name', 'ascend_groups.ascend_start_time'],
+                                         'ascend_groups',
+                                         where='ascend_groups.ascend_start_time',
+                                         between=(f"'{date_start} {time_start}'", f"'{date_end} {time_end}'"))
+        print(result)
+        return render_template('groups/date_time_group.html', task7=result)
+    return render_template('groups/date_time_group.html')
 
 
 if __name__ == '__main__':

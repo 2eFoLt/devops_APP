@@ -7,7 +7,7 @@ CREATE TABLE `ascend_stat` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_height_id_idx` (`height_id`),
   KEY `fk_group_id_idx` (`group_id`),
-  CONSTRAINT `fk_group_id` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`),
+  CONSTRAINT `fk_group_id` FOREIGN KEY (`group_id`) REFERENCES `ascend_groups` (`id`),
   CONSTRAINT `fk_height_id` FOREIGN KEY (`height_id`) REFERENCES `heights` (`id`)
 );
 
@@ -21,8 +21,8 @@ CREATE TABLE `group_to_user` (
 INSERT INTO `group_to_user` VALUES (1,1),(1,2),(2,3),(2,4);
 
 
-DROP TABLE IF EXISTS `groups`;
-CREATE TABLE `groups` (
+DROP TABLE IF EXISTS `ascend_groups`;
+CREATE TABLE `ascend_groups` (
   `id` int NOT NULL AUTO_INCREMENT,
   `group_name` varchar(45) NOT NULL,
   `ascend_start_time` datetime NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE `groups` (
   UNIQUE KEY `id_UNIQUE` (`id`)
 );
 
-INSERT INTO `groups` VALUES (1,'Name1','2023-02-11 15:00:00'),(2,'Name2','2023-02-15 15:00:00');
+INSERT INTO `ascend_groups` VALUES (1,'Name1','2023-02-11 15:00:00'),(2,'Name2','2023-02-15 15:00:00');
 
 
 DROP TABLE IF EXISTS `heights`;
