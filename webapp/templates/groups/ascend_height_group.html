@@ -14,9 +14,9 @@
 <a href="/">Back to index</a>
 <form method="POST" action="/ascend_height_group">
     <select class="form-select" aria-label="Default select example" name="form_select">
-        {%for user in users%}
-        <option value='{{user[0]}}'>{{user[1]}}</option>
-        {%endfor%}
+        {% for user in users %}
+        <option value="{{user[0]}}">{{user[1]}}</option>
+        {% endfor %}
     </select>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
