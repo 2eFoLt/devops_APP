@@ -21,8 +21,8 @@ CREATE TABLE `group_to_user` (
 INSERT INTO `group_to_user` VALUES (1,1),(1,2),(2,3),(2,4);
 
 
-DROP TABLE IF EXISTS `ascend_ascend_groups`;
-CREATE TABLE `ascend_ascend_groups` (
+DROP TABLE IF EXISTS `ascend_groups`;
+CREATE TABLE `ascend_groups` (
   `id` int NOT NULL AUTO_INCREMENT,
   `group_name` varchar(45) NOT NULL,
   `ascend_start_time` datetime NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE `ascend_ascend_groups` (
   UNIQUE KEY `id_UNIQUE` (`id`)
 );
 
-INSERT INTO `ascend_ascend_groups` VALUES (1,'Name1','2023-02-11 15:00:00'),(2,'Name2','2023-02-15 15:00:00');
+INSERT INTO `ascend_groups` VALUES (1,'Name1','2023-02-11 15:00:00'),(2,'Name2','2023-02-15 15:00:00');
 
 
 DROP TABLE IF EXISTS `heights`;
