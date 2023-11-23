@@ -1,7 +1,7 @@
 db_config = {
-    'user': 'root',
-    'password': 'root',
-    'host': '127.0.0.1',
+    'user': 'std_2069_devops',
+    'password': '123123123',
+    'host': 'std-mysql',
     'port': '3306',
-    'database': 'devops_app'
+    'database': 'std_2069_devops'
 }
