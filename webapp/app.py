@@ -90,5 +90,27 @@ def date_time_group():
     return render_template('groups/date_time_group.html')
 
 
+@app.route('/ascend_height_group', methods=['GET', 'POST'])
+def ascend_height_group():
+    result_ascend = connector_object.select(['heights.id', 'name', 'height', 'country', 'ascend_counter'], 'heights',
+                                            joins=['ascend_stat on heights.id = ascend_stat.height_id',
+                                                   'group_to_user on ascend_stat.group_id = group_to_user.group_id'],
+                                            where='group_to_user.user_id = 1')
+    result_heights = connector_object.select(['*'], 'heights')
+    es1 = [i for i in result_heights if i not in result_ascend]
+    print(result_ascend)
+    print(es1)
+    es2 = set(result_ascend)
+    height_2_count = {}
+    for item in es2:
+        height_2_count[item[1]] = result_ascend.count(item)
+    for item in es1:
+        height_2_count[item[1]] = 0
+    user = connector_object.select(['username'], 'users')
+    print(user)
+    print(height_2_count)
+    return render_template('groups/ascend_height_group.html', task6=height_2_count)
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
