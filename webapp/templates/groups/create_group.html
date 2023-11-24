@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="static/styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <title>New group</title>
+</head>
+<body>
+<a href="/">Back to index</a>
+<form method="POST" action="/new_group">
+    <div class="form-group">
+        <label for="username">Название группы:</label>
+        <input type="text" class="form-control" name="group_name" id="username" placeholder="Название группы" required>
+    </div>
+    <label for="height_sel">Направление:</label>
+    <select class="form-select" aria-label="Default select example" id="height_sel" name="form_select" required>
+        {% for height in heights %}
+        <option value="{{height[0]}}">{{height[1]}}</option>
+        {% endfor %}
+    </select>
+    <div class="mb-3">
+        <label>Дата начала восхождения:</label>
+        <input type="date" name="date_start" value="2018-07-22" required/>
+    </div>
+    <div class="mb-3">
+        <label>Время начала восхождения:</label>
+        <input type="time" name="time_start" required/>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<script src="static/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
