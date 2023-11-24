@@ -133,5 +133,40 @@ def group_per_height():
     return render_template('group_per_height.html', heights=heights, results=results)
 
 
+@app.route('/new_group', methods=['GET', 'POST'])  # TASK 8
+# TODO: более удобный способ работы с базой, пересмотр структуры базы?
+def new_group():
+    if request.method == 'POST':
+        group_name, height_target, start_date, start_time = list(request.form.values())
+        start_time += ':00'
+        # f"'{date_start} {time_start}'"
+        connector_object.insert('ascend_groups', ['group_name', 'ascend_start_time'],
+                                [f'{group_name}', f"{start_date} {start_time}"])
+        group_id = connector_object.select(['ascend_groups.id'], 'ascend_groups',
+                                           where=f'group_name="{group_name}"')[0][0]
+        connector_object.insert('ascend_stat', ['height_id', 'group_id'], [height_target, group_id])
+        return redirect(url_for('new_group'))
+    else:
+        heights = connector_object.select(['*'], 'heights')
+        return render_template('groups/create_group.html', heights=heights)
+
+
+@app.route('/add_to_group', methods=['GET', 'POST'])  # TASK 5
+# TODO: большие вопросы к логике: существующий ли пользователь, корректная структура базы, триггеры?
+def add_to_group():
+    if request.method == 'POST':
+        group_id = request.form.get('form_select')
+        name, email, pswd = request.form.get('username'), request.form.get('email'), request.form.get('pswd')
+        print(name, email, pswd, group_id)
+        connector_object.insert('users', ['username', 'email', 'password'], [name, email, pswd])
+        user_id = connector_object.select(['users.id'], 'users', where=f'username="{name}"')[0][0]
+        connector_object.insert('group_to_user', ['group_id', 'user_id'], [group_id, user_id])
+        return redirect(url_for('add_to_group'))
+    else:
+        pass
+        all_groups = connector_object.select(['*'], 'ascend_groups')
+        return render_template('groups/add_to_group.html', groups=all_groups)
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

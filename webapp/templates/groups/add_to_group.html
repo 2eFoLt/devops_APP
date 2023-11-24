@@ -8,38 +8,31 @@
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link href="static/css/bootstrap.min.css" rel="stylesheet">
-    <title>Ascend height group</title>
+    <title>Add to group</title>
 </head>
 <body>
 <a href="/">Back to index</a>
-<form method="POST" action="/ascend_height_group">
+<form method="POST" action="/add_to_group">
+    <div class="form-group">
+        <label for="username">Логин</label>
+        <input type="text" class="form-control" name="username" id="username" placeholder="Ваш логин">
+    </div>
+    <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp"
+               placeholder="Enter email">
+    </div>
+    <div class="form-group">
+        <label for="pswd">Password</label>
+        <input type="password" class="form-control" name="pswd" id="pswd" placeholder="Password">
+    </div>
     <select class="form-select" aria-label="Default select example" name="form_select">
-        {% for user in users %}
-        <option value="{{user[0]}}">{{user[1]}}</option>
+        {% for group in groups %}
+        <option value="{{group[0]}}">{{group[1]}}</option>
         {% endfor %}
     </select>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-{% if task6 is defined %}
-<div class="container">
-    <table class="table table-bordered table-responsive dataTable mt-4 mb-0" id="routeTable">
-        <thead>
-        <tr>
-            <th>Название вершины</th>
-            <th>Кол-во восхождений</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for key in task6.keys() %}
-        <tr>
-            <th>{{key}}</th>
-            <th>{{task6[key]}}</th>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-</div>
-{% endif %}
 <script src="static/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
