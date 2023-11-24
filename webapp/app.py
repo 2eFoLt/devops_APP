@@ -7,7 +7,6 @@ connector_object = ConnectorDB()
 
 @app.route('/', methods=['GET'])
 def index():
-    # TODO: на базе поменять название таблицы с groups -> ascend_groups, конфликт с служебными командами MYSQL
     current_heights = connector_object.select(['*'], 'heights')
     return render_template('index.html', heights=current_heights)
 
@@ -120,7 +119,19 @@ def ascend_height_group():
     return render_template('groups/ascend_height_group.html', users=result_users)
 
 
+@app.route('/group_per_height', methods=['GET'])  # TASK 1
+def group_per_height():
+    heights = connector_object.select(['*'], 'heights')
+    height_ids = [item[0] for item in connector_object.select(['id'], 'heights')]
+    results = [connector_object.select(['group_name', 'ascend_start_time'], 'ascend_groups',
+                                       joins=['ascend_stat on ascend_groups.id = ascend_stat.group_id',
+                                              'heights on ascend_stat.height_id = heights.id'],
+                                       where=f'heights.id = {h_id}',
+                                       order_by='ascend_start_time') for h_id in height_ids]
+    print(results)
+    print(heights)
+    return render_template('group_per_height.html', heights=heights, results=results)
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
-
-
