@@ -1,3 +1,5 @@
+CREATE DATABASE devops;
+USE devops;
 DROP TABLE IF EXISTS `ascend_stat`;
 CREATE TABLE `ascend_stat` (
   `id` int NOT NULL AUTO_INCREMENT,
