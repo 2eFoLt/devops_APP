@@ -44,7 +44,7 @@ CREATE TABLE `heights` (
   UNIQUE KEY `id_UNIQUE` (`id`)
 );
 
-INSERT INTO `heights` VALUES (1,'Аннапурна',8091,'Непал',0),(2,'Килиманджаро',5881,'Танзания',0),(3,'Эльбрус',5642,'Россия',0),(4,'Монблан',4810,'Швейцария',0),(5,'Казбек',5033,'Россия/Грузия',0),(6,'Фудзияма',3776,'Япония',0);
+INSERT INTO `heights` VALUES (1,'Annapurna',8091,'Nepal',0),(2,'Kilimanjaro',5881,'Tanzania',0),(3,'Elbrus',5642,'Russia',0),(4,'Montblanc',4810,'Switzerland',0),(5,'Kazbek',5033,'Russia/Georgia',0),(6,'Fuji-san',3776,'Japan',0);
 
 
 DROP TABLE IF EXISTS `users`;
