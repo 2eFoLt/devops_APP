@@ -2,6 +2,6 @@ db_config = {
     'user': 'root',
     'password': 'root',
     'host': 'db',
-    'port': '33060',
+    'port': '3306',
     'database': 'devops'
 }

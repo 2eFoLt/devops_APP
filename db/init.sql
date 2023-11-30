@@ -4,7 +4,7 @@ USE devops;
 DROP TABLE IF EXISTS `group_to_user`;
 CREATE TABLE `group_to_user` (
   `group_id` int NOT NULL,
-  `user_id` int NOT NULL,
+  `user_id` int NOT NULL
 );
 INSERT INTO `group_to_user` VALUES (1,1),(1,2),(2,3),(2,4);
 
