@@ -1,38 +1,12 @@
 CREATE DATABASE devops;
 USE devops;
-DROP TABLE IF EXISTS `ascend_stat`;
-CREATE TABLE `ascend_stat` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `height_id` int NOT NULL,
-  `group_id` int NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  KEY `fk_height_id_idx` (`height_id`),
-  KEY `fk_group_id_idx` (`group_id`),
-  CONSTRAINT `fk_group_id` FOREIGN KEY (`group_id`) REFERENCES `ascend_groups` (`id`),
-  CONSTRAINT `fk_height_id` FOREIGN KEY (`height_id`) REFERENCES `heights` (`id`)
-);
-
 
 DROP TABLE IF EXISTS `group_to_user`;
 CREATE TABLE `group_to_user` (
   `group_id` int NOT NULL,
   `user_id` int NOT NULL,
 );
-
 INSERT INTO `group_to_user` VALUES (1,1),(1,2),(2,3),(2,4);
-
-
-DROP TABLE IF EXISTS `ascend_groups`;
-CREATE TABLE `ascend_groups` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `group_name` varchar(45) NOT NULL,
-  `ascend_start_time` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`)
-);
-
-INSERT INTO `ascend_groups` VALUES (1,'Name1','2023-02-11 15:00:00'),(2,'Name2','2023-02-15 15:00:00');
 
 
 DROP TABLE IF EXISTS `heights`;
@@ -45,9 +19,32 @@ CREATE TABLE `heights` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
 );
-
 INSERT INTO `heights` VALUES (1,'Annapurna',8091,'Nepal',0),(2,'Kilimanjaro',5881,'Tanzania',0),(3,'Elbrus',5642,'Russia',0),(4,'Montblanc',4810,'Switzerland',0),(5,'Kazbek',5033,'Russia/Georgia',0),(6,'Fuji-san',3776,'Japan',0);
 
+
+DROP TABLE IF EXISTS `ascend_groups`;
+CREATE TABLE `ascend_groups` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `group_name` varchar(45) NOT NULL,
+  `ascend_start_time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+);
+INSERT INTO `ascend_groups` VALUES (1,'Name1','2023-02-11 15:00:00'),(2,'Name2','2023-02-15 15:00:00');
+
+
+DROP TABLE IF EXISTS `ascend_stat`;
+CREATE TABLE `ascend_stat` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `height_id` int NOT NULL,
+  `group_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  KEY `fk_height_id_idx` (`height_id`),
+  KEY `fk_group_id_idx` (`group_id`),
+  CONSTRAINT `fk_group_id` FOREIGN KEY (`group_id`) REFERENCES `ascend_groups` (`id`),
+  CONSTRAINT `fk_height_id` FOREIGN KEY (`height_id`) REFERENCES `heights` (`id`)
+);
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
