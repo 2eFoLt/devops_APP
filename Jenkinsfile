@@ -6,7 +6,6 @@ pipeline {
                 echo "Building.."
                 sh '''
                 ls
-                ip a
                 docker run hello-world
                 '''
             }
