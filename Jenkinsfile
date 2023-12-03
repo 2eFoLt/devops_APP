@@ -7,8 +7,8 @@ pipeline {
                 sh '''
                 ls
                 docker version
-                docker info
-                docker compose version 
+                docker compose version
+                docker compose up -d
                 '''
             }
         }
