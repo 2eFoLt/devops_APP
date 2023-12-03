@@ -4,9 +4,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Building.."
-                docker version
                 sh '''
                 ls
+                docker version
                 docker info
                 docker compose version 
                 '''
