@@ -6,8 +6,6 @@ pipeline {
                 echo "Building.."
                 sh '''
                 ls
-                docker version
-                docker compose version
                 docker compose up -d
                 '''
             }
