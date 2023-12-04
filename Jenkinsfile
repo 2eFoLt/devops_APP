@@ -15,18 +15,7 @@ pipeline {
                 {
                     sh 'cd webapp/'
                     sh 'ls'
-                    docker_image = docker.build(registry + ":$BUILD_NUMBER", "-f webapp/Dockerfile")
-                }
-            }
-        }
-        stage('Test')
-        {
-            steps
-            {
-                script {
-                    docker_image.inside {
-                    sh 'Image is alive'
-                    }
+                    sh 'docker build -f webapp/Dockerfile -t $registry .'
                 }
             }
         }
