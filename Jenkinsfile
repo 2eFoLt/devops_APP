@@ -13,6 +13,7 @@ pipeline {
             {
                 script
                 {
+                    sh 'cd webapp/'
                     docker_image = docker.build(registry + ":$BUILD_NUMBER")
                 }
             }
