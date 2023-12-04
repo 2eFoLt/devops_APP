@@ -21,8 +21,10 @@ pipeline {
         {
             steps
             {
-                docker_image.inside {
+                script {
+                    docker_image.inside {
                     sh 'Image is alive'
+                    }
                 }
             }
         }
