@@ -17,8 +17,8 @@ pipeline {
                     ls
                     pwd
                     cd webapp/
+                    docker build -t $registry .
                     '''
-                    docker_image = docker.build("$registry")
                 }
             }
         }
