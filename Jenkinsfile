@@ -14,6 +14,7 @@ pipeline {
                 script
                 {
                     sh 'cd webapp/'
+                    sh 'ls'
                     docker_image = docker.build(registry + ":$BUILD_NUMBER")
                 }
             }
