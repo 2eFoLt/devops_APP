@@ -15,7 +15,7 @@ pipeline {
                 {
                     sh 'cd webapp/'
                     sh 'ls'
-                    docker_image = docker.build(registry + ":$BUILD_NUMBER")
+                    docker_image = docker.build(registry + ":$BUILD_NUMBER", "-f webapp/Dockerfile")
                 }
             }
         }
