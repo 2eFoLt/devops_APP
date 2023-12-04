@@ -1,28 +1,29 @@
 pipeline {
     agent any
-    stages {
-        stage('Build') {
-            steps {
-                echo "Building.."
-                sh '''
-                ls
-                pwd
-                cd webapp/
-                '''
-                app=docker.build("2efolt/devops_app")
-            }
-        }
-        stage('Test') {
-            steps {
-                echo "Testing.."
-                app.inside {
-                    sh 'echo "Tests passed"'
+    environment
+    {
+        registry = "2efolt/devops_app"
+        registryCredential = '2efolt_docker'        
+    }
+    stages
+    {
+        stage('Build')
+        {
+            steps
+            {
+                script
+                {
+                    docker_image = docker.build(registry + ":$BUILD_NUMBER")
                 }
             }
         }
-        stage('Deliver') {
-            steps {
-                echo 'Deliver....'
+        stage('Test')
+        {
+            steps
+            {
+                docker_image.inside {
+                    sh 'Image is alive'
+                }
             }
         }
     }
