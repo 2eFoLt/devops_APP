@@ -7,7 +7,7 @@ pipeline {
                 sh '''
                 ls
                 pwd
-                docker-compose build
+                docker-compose -f $WORKSPACE/docker-compose.yml build
                 '''
             }
         }
