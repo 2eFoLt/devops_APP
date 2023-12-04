@@ -6,7 +6,7 @@ pipeline {
                 echo "Building.."
                 sh '''
                 ls
-                docker run hello-world
+                docker compose up -d
                 '''
             }
         }
