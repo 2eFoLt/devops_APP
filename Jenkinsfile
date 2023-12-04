@@ -13,8 +13,10 @@ pipeline {
             {
                 script
                 {
-                    sh 'cd webapp/'
-                    sh 'ls'
+                    sh '''
+                    ls
+                    pwd
+                    '''
                     sh 'docker build -f webapp/Dockerfile -t $registry .'
                 }
             }
