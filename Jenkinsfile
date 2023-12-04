@@ -16,7 +16,7 @@ pipeline {
                     sh '''
                     ls
                     pwd
-                    echo ${WORKSPACE}
+                    cd webapp/
                     docker build -t $registry .
                     '''
                 }
