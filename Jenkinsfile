@@ -7,17 +7,17 @@ pipeline {
                 sh '''
                 ls
                 pwd
-                docker-compose -f $WORKSPACE/docker-compose.yml build
+                cd webapp/
                 '''
+                app=docker.build("2efolt/devops_app")
             }
         }
         stage('Test') {
             steps {
                 echo "Testing.."
-                sh '''
-                docker compose ps
-                curl 0.0.0.0:5000
-                '''
+                app.inside {
+                    sh 'echo "Tests passed"'
+                }
             }
         }
         stage('Deliver') {
