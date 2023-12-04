@@ -18,7 +18,7 @@ pipeline {
                     pwd
                     cd webapp/
                     '''
-                    docker_image = docker.build("$registry:$BUILD_NUMBER")
+                    docker_image = docker.build("$registry")
                 }
             }
         }
