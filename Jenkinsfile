@@ -18,8 +18,8 @@ pipeline {
                     ls webapp/
                     cd webapp/
                     pwd
+                    docker build -t $registry .
                     '''
-                    sh 'docker build -t $registry .'
                 }
             }
         }
