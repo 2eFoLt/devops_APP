@@ -15,10 +15,9 @@ pipeline {
                 {
                     sh '''
                     ls
-                    ls webapp/
                     cd webapp/
                     pwd
-                    docker build -f $WORKSPACE/webapp/ -t $registry .
+                    docker build -t $registry .
                     '''
                 }
             }
