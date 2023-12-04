@@ -6,6 +6,7 @@ pipeline {
                 echo "Building.."
                 sh '''
                 ls
+                pwd
                 docker compose -f docker-compose.yml up -d
                 '''
             }
