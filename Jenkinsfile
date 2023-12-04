@@ -15,6 +15,7 @@ pipeline {
                 {
                     sh '''
                     ls
+                    ls webapp/
                     pwd
                     '''
                     sh 'docker build -f webapp/Dockerfile -t $registry .'
