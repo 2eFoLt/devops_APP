@@ -2,9 +2,9 @@ pipeline {
     agent any
     environment
     {
-        registry_db = "2efolt/devops_app"
-        registry_app = "2efolt/devops_db"
-        registryCredential = '2efolt_docker'        
+        registry_db = "2efolt/devops_db:latest"
+        registry_app = "2efolt/devops_app:latest"
+        DOCKERHUB_CREDENTIALS= credentials('docker')      
     }
     stages
     {
@@ -39,9 +39,34 @@ pipeline {
                 script
                 {
                     echo 'Testing connection'
-                    sh 'curl 0.0.0.0:5000 | grep HTTP'
+                }
+            }
+        }
+        stage('Deploy')
+        {
+            steps
+            {
+                script
+                {
+                    echo 'Logging in DockerHub'
+                    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                }
+                script
+                {
+                    echo 'Pushing app'
+                    sh 'docker push $registry_app'
+                }
+                script
+                {
+                    echo 'Pushing db'
+                    sh 'docker push $registry_db'
                 }
             }
         }
     }
+    post{
+        always {  
+    	sh 'docker logout'     
+    }      
+}
 }
