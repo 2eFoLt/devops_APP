@@ -26,7 +26,7 @@ pipeline {
                     echo 'Building app'
                     sh '''
                     pwd
-                    cd ../webapp/
+                    cd webapp/
                     docker build -t $registry_app .
                     '''
                 }
