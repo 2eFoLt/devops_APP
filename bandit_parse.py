@@ -10,8 +10,4 @@ def check_report():
             raise Exception("Severity check failed!")
 
 
-try:
-    check_report()
-except FileNotFoundError:
-    os.system('bandit -r webapp -n 3 -ii -lll -f json -o test.json')
-    check_report()
+check_report()
