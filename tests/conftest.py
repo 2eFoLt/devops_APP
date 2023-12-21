@@ -1,5 +1,5 @@
 import pytest
-from app import app
+from webapp.app import app
 from webapp.db_config import db_config
 import webapp.connection_tools as tools
 
