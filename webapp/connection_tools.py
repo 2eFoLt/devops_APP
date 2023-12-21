@@ -1,4 +1,4 @@
-from db_config import db_config
+from webapp.db_config import db_config
 import mysql.connector
 
 
