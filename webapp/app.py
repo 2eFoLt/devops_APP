@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for
-from webapp.connection_tools import ConnectorDB
-from webapp.misc import _time
+from connection_tools import ConnectorDB
+from misc import _time
 
 app = Flask(__name__)
 connector_object = ConnectorDB()
