@@ -1,9 +1,9 @@
 import pytest
 import sys
 sys.path.append('/home/jenkins/workspace/DEVOPS_APP')
-from webapp.app import app
-from webapp.db_config import db_config
-import webapp.connection_tools as tools
+from app import app
+from db_config import db_config
+import connection_tools as tools
 
 
 @pytest.fixture()
