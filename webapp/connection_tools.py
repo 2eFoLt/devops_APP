@@ -1,4 +1,4 @@
-from db_config import db_config
+from webapp.db_config import db_config
 import mysql.connector
 
 
@@ -33,7 +33,7 @@ def wrap_in_quotes(iterable):
     return [f"'{i}'" for i in iterable]
 
 
-def iterable1_1(it1, it2):
+def columns_to_values(it1, it2):
     res = []
     for i in range(len(it1)):
         if not it2[i].isnumeric():
@@ -62,5 +62,5 @@ class ConnectorDB:
 
     @cursor_wrapper
     def update(self, target_table, it_columns, it_values, where=None):
-        query = f"UPDATE {target_table} SET {iterable1_1(it_columns, it_values)} WHERE {where}"
+        query = f"UPDATE {target_table} SET {columns_to_values(it_columns, it_values)} WHERE {where}"
         return query
