@@ -12,6 +12,14 @@ def index():
     return render_template('index.html', heights=current_heights)
 
 
+@app.route('/change_db', methods=['GET'])
+def change_db():
+    connector_object.drop_table('test_table')
+    connector_object.create_table('test_table')
+    connector_object.insert('test_table', ['id', 'a_test', 'b_test'], [1, 'a_value1', 'b_value1'])
+    return redirect(url_for('index'))
+
+
 @app.route('/view_height/<int:height_id>', methods=['GET'])
 def view_height(height_id):
     height = connector_object.select(['*'], 'heights', where=f'id={height_id}')

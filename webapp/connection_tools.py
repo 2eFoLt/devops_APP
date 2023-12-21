@@ -19,7 +19,7 @@ def cursor_wrapper(func):
         print('Cursor executed')
         cursor.close()
         print('Cursor closed')
-        if 'INSERT' in query or 'UPDATE' in query:
+        if 'INSERT' in query or 'UPDATE' in query or 'CREATE' in query or 'DROP' in query:
             connection.commit()
             print('Changes commited')
         connection.close()
@@ -63,4 +63,19 @@ class ConnectorDB:
     @cursor_wrapper
     def update(self, target_table, it_columns, it_values, where=None):
         query = f"UPDATE {target_table} SET {columns_to_values(it_columns, it_values)} WHERE {where}"
+        return query
+
+    @cursor_wrapper
+    def create_table(self, table_name):
+        query = f"CREATE TABLE `{table_name}` (" \
+                f"`id` int not null auto_increment," \
+                f"`a_test` varchar(45) NOT NULL," \
+                f"`b_test` varchar(45) NOT NULL," \
+                f"PRIMARY KEY (`id`)," \
+                f"UNIQUE KEY `id_UNIQUE` (`id`));"
+        return query
+
+    @cursor_wrapper
+    def drop_table(self, table_name):
+        query = f"DROP TABLE IF EXISTS `{table_name}`"
         return query
