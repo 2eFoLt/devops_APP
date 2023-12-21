@@ -69,30 +69,31 @@ pipeline {
                 sh 'docker exec devops_app bash -c "python -m pytest"'
             }
         }
-        // stage('Deploy')
-        // {
-        //     steps
-        //     {
-        //         script
-        //         {
-        //             echo 'Logging in DockerHub'
-        //             sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-        //         }
-        //         script
-        //         {
-        //             echo 'Pushing app'
-        //             sh 'docker push $registry_app'
-        //         }
-        //         script
-        //         {
-        //             echo 'Pushing db'
-        //             sh 'docker push $registry_db'
-        //         }
-        //     }
-        // }
+        stage('Deploy')
+        {
+            steps
+            {
+                script
+                {
+                    echo 'Logging in DockerHub'
+                    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                }
+                script
+                {
+                    echo 'Pushing app'
+                    sh 'docker push $registry_app'
+                }
+                script
+                {
+                    echo 'Pushing db'
+                    sh 'docker push $registry_db'
+                }
+            }
+        }
     }
     post{
-        always {  
+        always {
+        sh 'sudo ./startup/stop.sh'
     	sh 'docker logout'     
     }      
 }
